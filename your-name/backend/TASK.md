@@ -210,6 +210,7 @@ print(f'Overlap result: {result}')  # → False
 def calculate_event_duration_minutes(start_datetime: datetime, end_datetime: datetime) -> int:
     """
     イベントの継続時間を分単位で計算
+    開始日時が終了日時以降の場合は例外を発生させる
     
     Args:
         start_datetime: 開始日時
@@ -217,6 +218,9 @@ def calculate_event_duration_minutes(start_datetime: datetime, end_datetime: dat
     
     Returns:
         int: 継続時間（分）
+        
+    Raises:
+        ValueError: 開始日時が終了日時以降の場合
     """
 ```
 
@@ -225,7 +229,7 @@ def calculate_event_duration_minutes(start_datetime: datetime, end_datetime: dat
 # 仮想環境に入る
 source venv/bin/activate
 
-# 検証コマンド
+# 正常ケースの検証コマンド
 python -c "
 from app.utils.datetime import calculate_event_duration_minutes
 from datetime import datetime
@@ -234,6 +238,30 @@ duration = calculate_event_duration_minutes(
     datetime(2024,1,1,12,30)
 )
 print(f'Duration: {duration} minutes')  # → 150
+"
+
+# 異常ケースの検証コマンド（開始時刻 > 終了時刻）
+python -c "
+from app.utils.datetime import calculate_event_duration_minutes
+from datetime import datetime
+try:
+    duration = calculate_event_duration_minutes(
+        datetime(2024,1,1,12,0), 
+        datetime(2024,1,1,10,0)
+    )
+except ValueError as e:
+    print(f'Error: {e}')  # → 開始日時は終了日時より前である必要があります
+"
+
+# 異常ケースの検証コマンド（開始時刻 = 終了時刻）
+python -c "
+from app.utils.datetime import calculate_event_duration_minutes
+from datetime import datetime
+try:
+    same_time = datetime(2024,1,1,10,0)
+    duration = calculate_event_duration_minutes(same_time, same_time)
+except ValueError as e:
+    print(f'Error: {e}')  # → 開始日時は終了日時より前である必要があります
 "
 
 # APIレスポンスにduration_minutesフィールドが追加される
@@ -254,6 +282,7 @@ python -m app.init_db
 - [ ] `app/utils/datetime.py`に`calculate_event_duration_minutes`関数が存在する
 - [ ] 関数のシグネチャが正しい
 - [ ] 継続時間の計算が正確
+- [ ] 開始日時が終了日時以降の場合にValueError "開始日時は終了日時より前である必要があります" を発生させる
 - [ ] APIレスポンスに`duration_minutes`フィールドが含まれる
 - [ ] フィールドの値が整数型である
 
@@ -320,6 +349,9 @@ curl "http://localhost:8080/health"
 適宜以下のテストを実行し、達成状況を確認してください。
 
 ```bash
+# 仮想環境の有効化
+source venv/bin/activate
+
 # サーバーを起動した状態で別のターミナルを開き、backendディレクトリにある以下の採点スクリプトを実行する
 # その後、全ての課題がpassすることを確認する（warningsへの対応は不要です）
 sh ./scripts/test_all_features.sh

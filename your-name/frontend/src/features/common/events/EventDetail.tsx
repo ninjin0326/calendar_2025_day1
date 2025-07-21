@@ -21,6 +21,7 @@ const EventDetail = ({
   }, [events, eventId]);
   if (!event) return;
 
+  // TODO: 課題5 - 日時表示のフォーマットを修正してください
   const dateToString = (date: Date, dayOnly = false) => {
     const day = `${date.getFullYear()}/${
       date.getMonth() + 1
@@ -71,6 +72,7 @@ const EventDetail = ({
           <Button onClick={handleClickEdit} size="small" aria-label="edit">
             <ModeEditIcon />
           </Button>
+          {/* TODO: 課題6 - 削除ボタンを追加してください */}
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "100px 1fr" }}>

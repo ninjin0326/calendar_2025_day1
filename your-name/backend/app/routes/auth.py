@@ -13,25 +13,18 @@ security = HTTPBasic()
 def verify_credentials(
     credentials: HTTPBasicCredentials = Depends(security), db: Session = Depends(get_db)
 ):
-    """Basic認証の検証 - 簡易版（課題4でJWT認証に変更）"""
     # 簡易的な認証：ユーザー名とパスワードが同じ場合のみ認証成功
     user = db.query(User).filter(User.username == credentials.username).first()
 
     if user and credentials.username == credentials.password:
         return credentials.username
 
+    # TODO: 課題3 - エラーメッセージを修正してください
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Authentication required",
         headers={"WWW-Authenticate": "Basic"},
     )
-
-
-# TODO: 課題4 - JWTトークンベースの認証を実装してください
-# @router.post("/login")
-# async def login(...):
-#     """JWTトークンを返すログインエンドポイントを実装してください"""
-#     pass
 
 
 @router.get("/me", response_model=UserResponse)

@@ -20,7 +20,7 @@ class UserUpdate(BaseModel):
 
 class UserResponse(UserBase):
     id: int
-    created_at: datetime
+    # TODO: 課題2 - created_atフィールドを追加してください
 
     class Config:
         from_attributes = True

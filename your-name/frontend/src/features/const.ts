@@ -11,4 +11,5 @@ export const genres = [
     genres: "other",
     color: "gray",
   },
+  // TODO: 課題1 - 3つのジャンルを追加してください
 ];

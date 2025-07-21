@@ -21,16 +21,10 @@ async def get_events(
     start_date: Optional[str] = Query(None),
     end_date: Optional[str] = Query(None),
     user_id: Optional[int] = Query(None),
+    # TODO: 課題1 - genreパラメータを追加してください
     username: str = Depends(verify_credentials),
     db: Session = Depends(get_db),
 ):
-    """イベント一覧取得
-
-    TODO: 課題6 - 以下の説明を追加してください
-    - パラメータの説明
-    - レスポンス形式の説明
-    - エラーケースの説明
-    """
     # 現在のユーザーを取得
     current_user = db.query(User).filter(User.username == username).first()
     if not current_user:
@@ -49,6 +43,7 @@ async def get_events(
             start_dt = datetime.fromisoformat(start_date.replace("Z", "+00:00"))
             query = query.filter(Event.start_datetime >= start_dt)
         except ValueError:
+            # TODO: 課題3 - エラーメッセージを修正してください
             raise HTTPException(status_code=400, detail="Bad request")
 
     if end_date:
@@ -56,7 +51,10 @@ async def get_events(
             end_dt = datetime.fromisoformat(end_date.replace("Z", "+00:00"))
             query = query.filter(Event.end_datetime <= end_dt)
         except ValueError:
+            # TODO: 課題3 - エラーメッセージを修正してください  
             raise HTTPException(status_code=400, detail="Bad request")
+
+    # TODO: 課題1 - ジャンルフィルタを追加してください
 
     events = query.all()
 
@@ -75,11 +73,6 @@ async def create_event(
     current_user = db.query(User).filter(User.username == username).first()
     if not current_user:
         raise HTTPException(status_code=400, detail="User not found")
-
-    # TODO: 課題4 - 詳細なバリデーションを実装してください
-    # - タイトルは必須、1文字以上100文字以下
-    # - 開始日時は現在時刻以降のみ許可
-    # - 終了日時は開始日時より後のみ許可
 
     # ジャンルのバリデーション（事前定義された値のみ許可）
     allowed_genres = ["work", "private", "other"]
@@ -106,7 +99,6 @@ async def create_event(
     db.add(new_event)
     db.commit()
 
-    # TODO: 課題5 - 作成されたイベント情報をJSONで返すように修正してください（ステータスコード201）
     return None
 
 
@@ -217,7 +209,6 @@ async def update_event(
 
     db.commit()
 
-    # TODO: 課題5 - 更新されたイベント情報をJSONで返すように修正してください（ステータスコード200）
     return None
 
 

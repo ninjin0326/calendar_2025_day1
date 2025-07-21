@@ -85,7 +85,6 @@ const useCreateForm = (initialEvent?: CreateEventState) => {
     dispatch({ type: "SET_EVENT", payload: event });
 
   useEffect(() => {
-    // TODO: タイトルのバリデーション機能を追加してください
     setCanSubmit(state.title !== "");
   }, [state]);
 

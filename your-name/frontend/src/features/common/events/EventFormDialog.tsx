@@ -130,6 +130,7 @@ const EventFormDialog = ({
             marginBottom: 20,
           }}
         >
+          {/* TODO: 課題4 - タイトルのバリデーションを追加してください */}
           <TextField
             label="タイトル"
             value={event.title}
@@ -207,6 +208,7 @@ const EventFormDialog = ({
               </Select>
           </FormControl>
         </div>
+        {/* TODO: 課題4 - 保存ボタンを無効化してください */}
         <Button type="submit" variant="contained">
           保存
         </Button>

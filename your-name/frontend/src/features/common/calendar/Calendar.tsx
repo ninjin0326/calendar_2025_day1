@@ -83,6 +83,7 @@ const Calendar = ({
 
   return (
     <div>
+      {/* TODO: 課題2 - ヘッダーのレイアウトを調整してください */}
       <div
         style={{
           display: "flex",
