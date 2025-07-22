@@ -10,31 +10,31 @@
 - **バックエンド**: Python3 + FastAPI
 - **データベース**: SQLite + SQLAlchemy
 
-## 課題構成（3段階）
+## 課題構成
 
-**重要：まず `your-name`ディレクトリの名前を`{firstname}-{lastaname}` （例：taro-yamada） に変更してから問題を解き始めてください。**
+**重要：まず `your-name`ディレクトリをコピーし、ディレクトリ名を`{firstname}-{lastaname}` （例：taro-yamada） に変更してから問題を解き始めてください。**
 
 ### Phase 1: 選択制スタート
 フロントエンドとバックエンドに設けられた課題をそれぞれ解いてください。どちらを先に選択しても良く、また同時並行で進めても構いません。
 
-- **A. フロントエンド**: [frontend/](./frontend/README.md) - React + TypeScript (見積3.25時間)
-- **B. バックエンド**: [backend/](./backend/README.md) - FastAPI + Python (見積3時間)
+- **A. フロントエンド**: ./frontend/README.md - React + TypeScript
+- **B. バックエンド**: ./backend/README.md - FastAPI + Python
 
 各ディレクトリはそれぞれ独立して動作させることができます。
 - フロントエンド：モックAPIサーバー付きで単体で開発が可能
 - バックエンド：API実装のみであり単体で開発が可能
 
 ### Phase 2: 統合演習問題
-フロント・バック間のAPI連携を実装し、統合アプリケーションを完成させます。
+フロント・バック間のAPI連携を実装し、統合アプリケーションを完成させてください。
 
-[統合演習問題](./challenge-phase2.md) を読んで実装してください。
+統合演習問題 (./challenge-phase2.md) を読んで実装してください。
 
 ### Phase 3: 改善・最適化
-UX改善、パフォーマンス最適化、追加機能実装、コードの可読性改善などを行います。
+さらなる改善・最適化のため、UX改善、パフォーマンス最適化、追加機能実装、コードの可読性改善、ドキュメント追加 などをおこなってください。
 
 ## 評価方針
 
-Phase 1 のフロントエンド、Phase2, 3 については [SUBMISSION.md](./SUBMISSION.md)に記載された説明を元に評価を行います。<br>
+Phase 1 のフロントエンド、Phase2, 3 については SUBMISSION.md に記載された説明を元に評価を行います。<br>
 Phase 1 のバックエンドについてはpytestによる自動テストで評価をおこないます。
 
 ## 認証情報
