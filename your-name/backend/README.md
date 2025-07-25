@@ -26,7 +26,7 @@ FastAPI + SQLAlchemy を使用したカレンダーアプリケーションの�
 cd solution/backend
 
 # 仮想環境の作成
-python -m venv venv
+python3.13 -m venv venv
 
 # 仮想環境の有効化
 source venv/bin/activate
@@ -38,10 +38,10 @@ pip install -r requirements.txt
 pip install "pydantic[email]"
 
 # データベースの初期化
-python -m app.init_db
+python3.13 -m app.init_db
 
 # サーバー起動（ポート8080）
-python -m app.main
+python3.13 -m app.main
 ```
 
 ## 動作確認
@@ -127,7 +127,7 @@ pytest -n auto
 ```bash
 # データベースファイルを削除して再初期化
 rm calendar.db
-python -m app.init_db
+python3.13 -m app.init_db
 ```
 
 ## トラブルシューティング
