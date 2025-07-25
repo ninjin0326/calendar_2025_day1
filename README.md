@@ -61,3 +61,5 @@ Phase 1 のバックエンドについてはpytestによる自動テストで評
 ## サポート
 
 質問やトラブルがあれば、お気軽に講師やメンターまでお声がけください。
+
+JAPAN AIのログインはこちら→ https://app.japan-ai.co.jp/auth/sign-up
