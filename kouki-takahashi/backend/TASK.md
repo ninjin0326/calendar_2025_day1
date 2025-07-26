@@ -2,10 +2,10 @@
 
 以下の演習問題に沿ってソースコードを修正してください。どの問題から解いても構いません。
 
-**注意**: 各問題を正確に採点するため、API仕様やエラーメッセージは**厳密に**指定通りに実装してください。<br>
+**注意**: 各問題を正確に採点するため、API 仕様やエラーメッセージは**厳密に**指定通りに実装してください。<br>
 ./SUBMISSION.md ファイルの作成は不要です。
 
-## 問題1. ジャンルフィルタ機能実装
+## 問題 1. ジャンルフィルタ機能実装
 
 ### 課題
 
@@ -16,11 +16,13 @@
 既存の`GET /api/events/`エンドポイントにクエリパラメータ`genre`を追加し、以下の出力を実現する：
 
 **必須実装**:
+
 - ジャンルによる完全一致フィルタ
 - 大文字小文字の区別あり
 - フィルタなしの場合は全件取得（既存動作維持）
 
-**検証方法：APIレスポンス**
+**検証方法：API レスポンス**
+
 ```bash
 # 全件取得（既存動作維持）
 curl -u testuser:testuser "http://localhost:8080/api/events/"
@@ -40,15 +42,16 @@ curl -u testuser:testuser "http://localhost:8080/api/events/?genre=nonexistent"
 ```
 
 **採点基準**:
+
 - [ ] ジャンルフィルタが正常に動作する（完全一致）
 - [ ] フィルタなしの場合も正常に動作する
 - [ ] 存在しないジャンルで空配列が返される
 
 ### 見積
 
-0.5時間
+0.5 時間
 
-## 問題2. ユーザータイムスタンプ機能実装
+## 問題 2. ユーザータイムスタンプ機能実装
 
 ### 課題
 
@@ -59,10 +62,12 @@ curl -u testuser:testuser "http://localhost:8080/api/events/?genre=nonexistent"
 ユーザーテーブルに以下のタイムスタンプフィールドを追加し、適切に設定されるようにする：
 
 **必須実装**:
-- `created_at`: ユーザー作成時刻（自動設定、ISO 8601形式）
-- `updated_at`: ユーザー更新時刻（自動設定、ISO 8601形式）
+
+- `created_at`: ユーザー作成時刻（自動設定、ISO 8601 形式）
+- `updated_at`: ユーザー更新時刻（自動設定、ISO 8601 形式）
 
 **検証方法：データベーススキーマ**
+
 ```bash
 # SQLiteスキーマ確認
 sqlite3 calendar.db ".schema users"
@@ -77,16 +82,17 @@ curl -u testuser:testuser "http://localhost:8080/api/auth/me"
 ```
 
 **採点基準**:
-- [ ] usersテーブルにcreated_atフィールドが存在する
-- [ ] usersテーブルにupdated_atフィールドが存在する
-- [ ] APIレスポンスにcreated_atが含まれる
-- [ ] created_atがISO 8601形式である
+
+- [ ] users テーブルに created_at フィールドが存在する
+- [ ] users テーブルに updated_at フィールドが存在する
+- [ ] API レスポンスに created_at が含まれる
+- [ ] created_at が ISO 8601 形式である
 
 ### 見積
 
-0.25時間
+0.25 時間
 
-## 問題3. APIエラーメッセージ統一
+## 問題 3. API エラーメッセージ統一
 
 ### 課題
 
@@ -98,13 +104,14 @@ curl -u testuser:testuser "http://localhost:8080/api/auth/me"
 
 **必須実装（厳密に以下のメッセージを返すこと）**:
 
-| エラーケース | HTTPステータス | エラーメッセージ（exactMatch） |
-|-------------|---------------|------------------------------|
-| 不正なstart_date形式 | 400 | `Invalid start_date format` |
-| 不正なend_date形式 | 400 | `Invalid end_date format` |
-| Basic認証なし | 401 | `Not authenticated` |
+| エラーケース           | HTTP ステータス | エラーメッセージ（exactMatch） |
+| ---------------------- | --------------- | ------------------------------ |
+| 不正な start_date 形式 | 400             | `Invalid start_date format`    |
+| 不正な end_date 形式   | 400             | `Invalid end_date format`      |
+| Basic 認証なし         | 401             | `Not authenticated`            |
 
 **検証方法：エラーレスポンス**
+
 ```bash
 # 不正な日付形式（認証必要）
 curl -u testuser:testuser "http://localhost:8080/api/events/?start_date=invalid-date"
@@ -119,16 +126,17 @@ curl "http://localhost:8080/api/events/"
 ```
 
 **採点基準**:
-- [ ] 不正なstart_date形式で`Invalid start_date format`が返される
-- [ ] 不正なend_date形式で`Invalid end_date format`が返される
+
+- [ ] 不正な start_date 形式で`Invalid start_date format`が返される
+- [ ] 不正な end_date 形式で`Invalid end_date format`が返される
 - [ ] 認証なしで`Not authenticated`が返される
-- [ ] HTTPステータスコードが正しい（400 or 401）
+- [ ] HTTP ステータスコードが正しい（400 or 401）
 
 ### 見積
 
-0.5時間
+0.5 時間
 
-## 問題4. イベント重複チェック機能実装
+## 問題 4. イベント重複チェック機能実装
 
 ### 課題
 
@@ -139,30 +147,33 @@ curl "http://localhost:8080/api/events/"
 `app/utils/validation.py`に重複チェック関数を実装し、イベント作成・更新時に使用する：
 
 **必須実装**:
+
 ```python
-def check_event_overlap(user_id: int, start_datetime: datetime, end_datetime: datetime, 
+def check_event_overlap(user_id: int, start_datetime: datetime, end_datetime: datetime,
                        exclude_event_id: int = None) -> bool:
     """
     同一ユーザーのイベント時間重複をチェック
-    
+
     Args:
         user_id: ユーザーID
         start_datetime: 開始日時
         end_datetime: 終了日時
         exclude_event_id: 除外するイベントID（更新時に使用）
-    
+
     Returns:
         bool: 重複がある場合True、ない場合False
     """
 ```
 
 **時間重複の定義**:
+
 - 新イベントの開始時刻が既存イベントの期間内にある
 - 新イベントの終了時刻が既存イベントの期間内にある
 - 新イベントが既存イベントを完全に包含する
 - 既存イベントが新イベントを完全に包含する
 
 **検証方法：重複チェック関数**
+
 ```bash
 # 仮想環境に入る
 source venv/bin/activate
@@ -185,17 +196,18 @@ print(f'Overlap result: {result}')  # → False
 ```
 
 **採点基準**:
+
 - [ ] `app/utils/validation.py`に`check_event_overlap`関数が存在する
 - [ ] 関数のシグネチャが正しい
-- [ ] 既存イベントと重複する場合にTrueを返す
-- [ ] 既存イベントと重複しない場合にFalseを返す
-- [ ] exclude_event_idが正しく機能する
+- [ ] 既存イベントと重複する場合に True を返す
+- [ ] 既存イベントと重複しない場合に False を返す
+- [ ] exclude_event_id が正しく機能する
 
 ### 見積
 
-0.75時間
+0.75 時間
 
-## 問題5. イベント継続時間計算機能実装
+## 問題 5. イベント継続時間計算機能実装
 
 ### 課題
 
@@ -203,28 +215,30 @@ print(f'Overlap result: {result}')  # → False
 
 ### 要件
 
-`app/utils/datetime.py`に継続時間計算関数を実装し、APIレスポンスに含める：
+`app/utils/datetime.py`に継続時間計算関数を実装し、API レスポンスに含める：
 
 **必須実装**:
+
 ```python
 def calculate_event_duration_minutes(start_datetime: datetime, end_datetime: datetime) -> int:
     """
     イベントの継続時間を分単位で計算
     開始日時が終了日時以降の場合は例外を発生させる
-    
+
     Args:
         start_datetime: 開始日時
         end_datetime: 終了日時
-    
+
     Returns:
         int: 継続時間（分）
-        
+
     Raises:
         ValueError: 開始日時が終了日時以降の場合
     """
 ```
 
-**検証方法：計算関数とAPIレスポンス**
+**検証方法：計算関数と API レスポンス**
+
 ```bash
 # 仮想環境に入る
 source venv/bin/activate
@@ -234,7 +248,7 @@ python -c "
 from app.utils.datetime import calculate_event_duration_minutes
 from datetime import datetime
 duration = calculate_event_duration_minutes(
-    datetime(2024,1,1,10,0), 
+    datetime(2024,1,1,10,0),
     datetime(2024,1,1,12,30)
 )
 print(f'Duration: {duration} minutes')  # → 150
@@ -246,7 +260,7 @@ from app.utils.datetime import calculate_event_duration_minutes
 from datetime import datetime
 try:
     duration = calculate_event_duration_minutes(
-        datetime(2024,1,1,12,0), 
+        datetime(2024,1,1,12,0),
         datetime(2024,1,1,10,0)
     )
 except ValueError as e:
@@ -272,6 +286,7 @@ curl -u testuser:testuser "http://localhost:8080/api/events/"
 ### 補足
 
 もし上記の検証コマンドでエラーが発生する場合は、一度データベースを初期化してください。
+
 ```bash
 mv calendar.db calendar.db.bak  # 予定データを削除しバックアップ
 # もし予定データが消えても良い場合は rm calendar.db
@@ -279,22 +294,23 @@ python -m app.init_db
 ```
 
 **採点基準**:
+
 - [ ] `app/utils/datetime.py`に`calculate_event_duration_minutes`関数が存在する
 - [ ] 関数のシグネチャが正しい
 - [ ] 継続時間の計算が正確
-- [ ] 開始日時が終了日時以降の場合にValueError "開始日時は終了日時より前である必要があります" を発生させる
-- [ ] APIレスポンスに`duration_minutes`フィールドが含まれる
+- [ ] 開始日時が終了日時以降の場合に ValueError "開始日時は終了日時より前である必要があります" を発生させる
+- [ ] API レスポンスに`duration_minutes`フィールドが含まれる
 - [ ] フィールドの値が整数型である
 
 ### 見積
 
-0.5時間
+0.5 時間
 
-## 問題6. APIヘルスチェック機能実装
+## 問題 6. API ヘルスチェック機能実装
 
 ### 課題
 
-APIの稼働状況を確認する手段がない
+API の稼働状況を確認する手段がない
 
 ### 要件
 
@@ -303,22 +319,25 @@ APIの稼働状況を確認する手段がない
 **必須実装場所**: `app/routes/health.py`を新規作成し、`app/main.py`でルーターを追加
 
 **レスポンス形式（データベースに接続できる正常時）**:
+
 ```json
 {
   "status": "healthy",
-  "timestamp": "2024-01-01T10:00:00Z",
+  "timestamp": "2024-01-01T10:00:00Z"
 }
 ```
 
 **レスポンス形式（データベースに接続できない異常時）**:
+
 ```json
 {
   "status": "unhealthy",
-  "timestamp": "2024-01-01T10:00:00Z",
+  "timestamp": "2024-01-01T10:00:00Z"
 }
 ```
 
-**検証方法：ヘルスチェックAPI**
+**検証方法：ヘルスチェック API**
+
 ```bash
 # ヘルスチェックエンドポイント
 curl "http://localhost:8080/health"
@@ -330,17 +349,18 @@ curl "http://localhost:8080/health"
 ```
 
 **採点基準**:
+
 - [ ] `/health`エンドポイントが存在する
 - [ ] レスポンスに`status`フィールドが含まれる
-- [ ] レスポンスに`timestamp`フィールドが含まれる（ISO 8601形式）
+- [ ] レスポンスに`timestamp`フィールドが含まれる（ISO 8601 形式）
 - [ ] 正常時に`status: "healthy"`が返される
-- [ ] HTTPステータスコード200が返される
+- [ ] HTTP ステータスコード 200 が返される
 
 ### 見積
 
-0.5時間
+0.5 時間
 
-**合計見積時間**: 約3時間
+**合計見積時間**: 約 3 時間
 
 ## 採点・提出について
 
@@ -359,7 +379,7 @@ sh ./scripts/test_all_features.sh
 
 ### 提出時の注意事項
 
-1. **API仕様の遵守**: エラーメッセージやレスポンス形式は正確に実装する
+1. **API 仕様の遵守**: エラーメッセージやレスポンス形式は正確に実装する
 2. **テストの実行**: 提出前に必ず自動テストを実行し、全てパスすることを確認する
 3. **コードの可読性**: 適切な関数名・変数名・コメントを使用する
 4. **ファイル配置**: 指定されたファイルパスに正確に実装する
@@ -367,7 +387,7 @@ sh ./scripts/test_all_features.sh
 ### よくあるミス
 
 - エラーメッセージの微細な差異（大文字小文字、句読点など）
-- HTTPステータスコードの間違い
+- HTTP ステータスコードの間違い
 - レスポンスフィールド名の間違い
 - 関数のシグネチャ（引数名・型）の間違い
 - ファイルパスの間違い

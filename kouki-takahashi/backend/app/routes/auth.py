@@ -22,7 +22,7 @@ def verify_credentials(
     # TODO: 課題3 - エラーメッセージを修正してください
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Authentication required",
+        detail="認証情報が無効です",
         headers={"WWW-Authenticate": "Basic"},
     )
 

@@ -45,7 +45,7 @@ async def get_events(
             query = query.filter(Event.start_datetime >= start_dt)
         except ValueError:
             # TODO: 課題3 - エラーメッセージを修正してください
-            raise HTTPException(status_code=400, detail="Bad request")
+            raise HTTPException(status_code=400, detail="開始時刻の形式が不正です")
 
     if end_date:
         try:
@@ -53,7 +53,7 @@ async def get_events(
             query = query.filter(Event.end_datetime <= end_dt)
         except ValueError:
             # TODO: 課題3 - エラーメッセージを修正してください  
-            raise HTTPException(status_code=400, detail="Bad request")
+            raise HTTPException(status_code=400, detail="終了時刻の形式が不正です")
 
     # TODO: 課題1 - ジャンルフィルタを追加してください
     if genre:

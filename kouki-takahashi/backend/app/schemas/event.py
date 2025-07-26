@@ -33,6 +33,7 @@ class EventResponse(EventBase):
     created_at: datetime
     updated_at: datetime
     # TODO: 課題5 - duration_minutesフィールドを追加してください
+    duration_minutes: Optional[int] = None
 
     class Config:
         from_attributes = True
@@ -50,6 +51,7 @@ class EventFrontendResponse(BaseModel):
     allDay: bool
     users: Optional[List[str]] = None
     # TODO: 課題5 - duration_minutesフィールドを追加してください
+    duration_minutes: Optional[int] = None
 
     @classmethod
     def from_event(cls, event):
