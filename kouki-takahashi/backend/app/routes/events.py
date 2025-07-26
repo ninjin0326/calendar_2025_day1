@@ -22,6 +22,7 @@ async def get_events(
     end_date: Optional[str] = Query(None),
     user_id: Optional[int] = Query(None),
     # TODO: 課題1 - genreパラメータを追加してください
+    genre: Optional[str] = Query(None), # 追加
     username: str = Depends(verify_credentials),
     db: Session = Depends(get_db),
 ):
@@ -55,7 +56,9 @@ async def get_events(
             raise HTTPException(status_code=400, detail="Bad request")
 
     # TODO: 課題1 - ジャンルフィルタを追加してください
-
+    if genre:
+        query = query.filter(Event.genre == genre)
+    
     events = query.all()
 
     # フロントエンド互換形式に変換（配列で返す）

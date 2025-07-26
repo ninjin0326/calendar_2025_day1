@@ -7,7 +7,7 @@ React + TypeScript を使用したカレンダーアプリケーションのフ�
 ## 技術スタック
 
 - **フレームワーク**: React 18 + TypeScript
-- **UIライブラリ**: Material-UI (MUI)
+- **UI ライブラリ**: Material-UI (MUI)
 - **カレンダー**: FullCalendar
 - **ビルドツール**: Vite
 - **日時処理**: Day.js
@@ -15,16 +15,16 @@ React + TypeScript を使用したカレンダーアプリケーションのフ�
 
 ## 必要な環境
 
-- Node.js 20以上
+- Node.js 20 以上
 - npm
 
 ## セットアップと起動
 
-### npmを使用
+### npm を使用
 
 ```bash
 # フロントエンドディレクトリに移動
-cd challenge/frontend
+cd challenge/fßrontend
 
 # 依存関係のインストール
 npm install
@@ -33,7 +33,7 @@ npm install
 npm run dev
 ```
 
-### フロントエンドのみで開発する場合（モックAPI使用）
+### フロントエンドのみで開発する場合（モック API 使用）
 
 ```bash
 # モックサーバーの起動（別ターミナル）
@@ -42,7 +42,7 @@ npm install
 npm start  # ポート3000で起動
 ```
 
-`challenge/frontend/.env`ファイルの`VITE_BACKEND_URL`を3001に変更する
+`challenge/frontend/.env`ファイルの`VITE_BACKEND_URL`を 3001 に変更する
 
 ```bash
 # フロントエンド開発サーバーの起動
@@ -52,14 +52,14 @@ npm run dev  # ポート3001で起動
 
 ## 動作確認
 
-サーバー起動後、以下のURLでアプリケーションにアクセスできます：
+サーバー起動後、以下の URL でアプリケーションにアクセスできます：
 
 - **アプリケーション**: http://localhost:3000
 
 ## バックエンド連携
 
-このフロントエンドは`challenge/frontend/.env`で指定したバックエンドAPIと連携します。
-バックエンドAPIと連携する処理は `src/features/api.ts` に記載されています。
+このフロントエンドは`challenge/frontend/.env`で指定したバックエンド API と連携します。
+バックエンド API と連携する処理は `src/features/api.ts` に記載されています。
 
 ### 認証情報
 
@@ -72,14 +72,14 @@ npm run dev  # ポート3001で起動
 
 ### 課題一覧
 
-1. **分類ラベルの追加** (0.25時間) - customer_visits、internal_meetings、external_meetingsを追加
-2. **UIレイアウト調整** (0.5時間) - ヘッダーボタンの配置調整
-3. **レスポンシブ対応** (0.5時間) - 600px以下での横スクロール対応
-4. **バリデーション追加** (0.5時間) - タイトル必須チェック
-5. **日時表示形式の統一** (1時間) - YYYY/MM/DD hh:mm形式に統一
-6. **削除機能の実装** (1時間) - 削除ボタンとAPI連携
+1. **分類ラベルの追加** (0.25 時間) - customer_visits、internal_meetings、external_meetings を追加
+2. **UI レイアウト調整** (0.5 時間) - ヘッダーボタンの配置調整
+3. **レスポンシブ対応** (0.5 時間) - 600px 以下での横スクロール対応
+4. **バリデーション追加** (0.5 時間) - タイトル必須チェック
+5. **日時表示形式の統一** (1 時間) - YYYY/MM/DD hh:mm 形式に統一
+6. **削除機能の実装** (1 時間) - 削除ボタンと API 連携
 
-**合計見積時間**: 約3.25時間
+**合計見積時間**: 約 3.25 時間
 
 ## 開発用コマンド
 
@@ -153,7 +153,7 @@ frontend/
 
 ## トラブルシューティング
 
-### API連携エラーの場合
+### API 連携エラーの場合
 
 1. バックエンドサーバーが起動しているか確認
 2. 認証情報が正しいか確認

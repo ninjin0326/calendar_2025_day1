@@ -1,6 +1,7 @@
 import { Event } from "@/types/type";
 import { useEffect, useState } from "react";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, Button } from "@mui/material";
 import { genres } from "@/features/const";
 
@@ -36,7 +37,6 @@ const EventDetail = ({
     return `${day} ${time}`;
   };
 
-
   const startDate = new Date(event?.start);
   const startString = dateToString(startDate, event.allDay);
 
@@ -51,6 +51,9 @@ const EventDetail = ({
     setDialogEdit(event.id);
   };
 
+  const handleClickDelete = () => {
+    setDialogDelete(event.id);
+  };
 
   return (
     <div
@@ -73,6 +76,9 @@ const EventDetail = ({
             <ModeEditIcon />
           </Button>
           {/* TODO: 課題6 - 削除ボタンを追加してください */}
+          <Button onClick={handleClickDelete} size="small" aria-label="delete">
+            <DeleteIcon />
+          </Button>
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "100px 1fr" }}>
@@ -80,8 +86,13 @@ const EventDetail = ({
           <strong>ジャンル</strong>
         </p>
         <div style={{ display: "flex", alignItems: "center" }}>
-         <Box bgcolor={genres.find((genre) => genre.genres === event.genre)?.color} sx={{ width: 10, height: 10, borderRadius: "50%", marginRight: 1 }} />
-          { event.genre }
+          <Box
+            bgcolor={
+              genres.find((genre) => genre.genres === event.genre)?.color
+            }
+            sx={{ width: 10, height: 10, borderRadius: "50%", marginRight: 1 }}
+          />
+          {event.genre}
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { genres } from "@/features/const";
 import { DialogState } from "@/features/routes/hooks/useDialogState";
 import { Event } from "@/types/type";
 import { ceilDate, floorDate } from "@/utils/dayjsUtils";
+import { Title } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -136,6 +137,7 @@ const EventFormDialog = ({
             value={event.title}
             onChange={handleChangeTitle}
             style={{ gridColumn: "1 / 3" }}
+            required
           />
           <div style={{ gridColumn: "1 / 3" }}>
             <strong>終日</strong>
@@ -175,41 +177,45 @@ const EventFormDialog = ({
           )}
           <FormControl style={{ gridColumn: "1 / 3" }}>
             <InputLabel id="genre-select-label">種別</InputLabel>
-              <Select
-                labelId="genre-select-label"
-                label="genre"
-                value={event.genre}
-                onChange={handleChangeGenre}
-                renderValue={(selected) => {
-                  const selectedColor = genres.find(
-                    (genre) => genre.genres === selected
-                  )?.color;
-                  return (
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <Box
-                        sx={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: "50%",
-                          backgroundColor: selectedColor,
-                          marginRight: 1,
-                        }}
-                      ></Box>
-                      {selected}
-                    </div>
-                  );
-                }}
-              >
-                {genres.map((genre) => (
-                  <MenuItem key={genre.genres} value={genre.genres}>
-                    {genre.genres}
-                  </MenuItem>
-                ))}
-              </Select>
+            <Select
+              labelId="genre-select-label"
+              label="genre"
+              value={event.genre}
+              onChange={handleChangeGenre}
+              renderValue={(selected) => {
+                const selectedColor = genres.find(
+                  (genre) => genre.genres === selected
+                )?.color;
+                return (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Box
+                      sx={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: "50%",
+                        backgroundColor: selectedColor,
+                        marginRight: 1,
+                      }}
+                    ></Box>
+                    {selected}
+                  </div>
+                );
+              }}
+            >
+              {genres.map((genre) => (
+                <MenuItem key={genre.genres} value={genre.genres}>
+                  {genre.genres}
+                </MenuItem>
+              ))}
+            </Select>
           </FormControl>
         </div>
         {/* TODO: 課題4 - 保存ボタンを無効化してください */}
-        <Button type="submit" variant="contained">
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={!canSubmit || event.title === ""}
+        >
           保存
         </Button>
       </form>

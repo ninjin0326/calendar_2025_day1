@@ -4,11 +4,14 @@ import { Event } from "@/types/type";
 import { EventClickArg, EventDropArg } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin, { EventResizeDoneArg } from "@fullcalendar/interaction";
+import interactionPlugin, {
+  EventResizeDoneArg,
+} from "@fullcalendar/interaction";
 import { putEvent } from "@/features/common/events/fetch";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import "./Calendar.css";
+import { aB } from "@fullcalendar/core/internal-common";
 
 const Calendar = ({
   events,
@@ -86,8 +89,10 @@ const Calendar = ({
       {/* TODO: 課題2 - ヘッダーのレイアウトを調整してください */}
       <div
         style={{
+          position: "relative", // 追加
           display: "flex",
           alignItems: "center",
+          justifyContent: "center", // 追加
           marginBottom: 6,
         }}
       >
@@ -96,7 +101,14 @@ const Calendar = ({
             ? `${headerDate.getFullYear()}年${headerDate.getMonth() + 1}月`
             : ""}
         </h1>
-        <ButtonGroup style={{ height: "full", alignItems: "center", marginLeft: 16 }}>
+        <ButtonGroup
+          style={{
+            height: "full",
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: 16,
+          }}
+        >
           <Button onClick={handlePrev} style={{ height: "full" }}>
             前
           </Button>
@@ -107,8 +119,13 @@ const Calendar = ({
             次
           </Button>
         </ButtonGroup>
-        <Button onClick={handleClickCreate} variant="contained" color="primary" style={{ marginLeft: 16 }}>
-          予定作成
+        <Button
+          onClick={handleClickCreate}
+          variant="contained"
+          color="primary"
+          style={{ position: "absolute", right: 0 }} // 変更
+        >
+          予定作成1
         </Button>
       </div>
 

@@ -1,1 +1,9 @@
-/* TODO: 課題3 - レスポンシブ対応のスタイルを追加してください */
+@media screen and (max-width: 600px) {
+  .calendar-container {
+    overflow-x: auto;
+  }
+  .calendar {
+    min-width: 600px;
+    width: 100%;
+  }
+}

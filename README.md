@@ -63,3 +63,5 @@ Phase 1 のバックエンドについてはpytestによる自動テストで評
 質問やトラブルがあれば、お気軽に講師やメンターまでお声がけください。
 
 JAPAN AIのログインはこちら→ https://app.japan-ai.co.jp/auth/sign-up
+
+GitHub URL: https://github.com/geniee-summer-internship/calendar_2025_day1
