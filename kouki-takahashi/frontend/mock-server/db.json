@@ -1,0 +1,57 @@
+{
+  "events": [
+    {
+      "id": "1",
+      "title": "チーム会議",
+      "start": "2025-07-15T10:00:00",
+      "end": "2025-07-15T11:00:00",
+      "genre": "work",
+      "allDay": false,
+      "users": ["user1", "user2"]
+    },
+    {
+      "id": "2",
+      "title": "プロジェクト企画会議",
+      "start": "2025-07-16T14:00:00",
+      "end": "2025-07-16T16:00:00",
+      "genre": "work",
+      "allDay": false,
+      "users": ["user1"]
+    },
+    {
+      "id": "3",
+      "title": "お昼休み",
+      "start": "2025-07-17T12:00:00",
+      "end": "2025-07-17T13:00:00",
+      "genre": "private",
+      "allDay": false,
+      "users": ["user1"]
+    },
+    {
+      "id": "4",
+      "title": "クライアント訪問",
+      "start": "2025-07-18T09:00:00",
+      "end": "2025-07-18T11:00:00",
+      "genre": "work",
+      "allDay": false,
+      "users": ["user1", "user3"]
+    },
+    {
+      "id": "5",
+      "title": "全社会議",
+      "start": "2025-07-20T00:00:00",
+      "end": "2025-07-20T23:59:59",
+      "genre": "work",
+      "allDay": true,
+      "users": ["user1", "user2", "user3"]
+    }
+  ],
+  "users": [
+    {
+      "id": "user1",
+      "username": "tanaka",
+      "email": "tanaka@example.com",
+      "created_at": "2025-07-01T00:00:00Z"
+    }
+  ]
+}

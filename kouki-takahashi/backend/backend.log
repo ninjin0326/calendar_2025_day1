@@ -1,0 +1,13 @@
+INFO:     Will watch for changes in these directories: ['/Users/shotaro-watanabe/git-repository/github.com/geniee-summer-internship/calendar_2025_mentor/solution/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8082 (Press CTRL+C to quit)
+INFO:     Started reloader process [46105] using WatchFiles
+INFO:     Started server process [46111]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:52991 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53066 - "GET /api/events HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:53158 - "GET /api/events HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:53203 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53250 - "GET /api/events HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:53346 - "GET /api/events/ HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:53410 - "GET /api/events/ HTTP/1.1" 200 OK
